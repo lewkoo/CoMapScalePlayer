@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file alias="anchor">Icons/anchor.png</file>
+        <file alias="poi">Icons/poi.png</file>
+        <file alias="anchorOrange">Icons/anchorOrange.png</file>
+        <file alias="anchorPurple">Icons/anchorPurple.png</file>
+        <file alias="peer">Icons/peer.png</file>
+        <file alias="peerOrange">Icons/peerOrange.png</file>
+        <file alias="peerPurple">Icons/peerPurple.png</file>
+        <file alias="restaurant">Icons/restaurant.png</file>
+        <file alias="hotel">Icons/hotel.png</file>
+        <file alias="anchorBlue">Icons/anchorBlue.png</file>
+        <file alias="anchorRed">Icons/anchorRed.png</file>
+        <file alias="peerRed">Icons/peerRed.png</file>
+        <file alias="peerBlue">Icons/peerBlue.png</file>
+    </qresource>
+</RCC>
