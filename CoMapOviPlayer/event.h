@@ -18,16 +18,19 @@ public:
     };
 
     Event(Event::EventType& type, int userId, int h, int m, int s, int ms, QGeoCoordinate& pos, QGeoBoundingBox& box);
+    Event(Event::EventType& type, int userId,  int h, int m, int s, int ms, QGeoCoordinate& pos, QGeoBoundingBox& box, int scale);
 
     inline QTime getTime() const {return time;}
     inline void setTime(QTime time);
 
     inline void setPos(QGeoCoordinate& pos);
-    inline QGeoCoordinate getPos();
+    inline QGeoCoordinate getPos() const {return position;}
 
     inline void setBox(QGeoBoundingBox& box);
     inline QGeoBoundingBox getBox();
-    inline void printEvent();
+
+    inline int getScale() const {return scale;}
+
 
 private:
     Event::EventType type;
@@ -35,6 +38,8 @@ private:
     QTime time;
     QGeoCoordinate position;
     QGeoBoundingBox box;
+
+    int scale; //???
 };
 
 #endif // EVENT_H

@@ -1,4 +1,6 @@
 #include <QtGui>
+#include <QTimer>
+#include <QEventLoop>
 #include <QtNetwork>
 #include <qgeoserviceprovider.h>
 #include "mappingwidget.h"
@@ -49,8 +51,10 @@ void MainWindow::addMapWidget(MappingWidget* mapWidget)
 void MainWindow::startPlayback(){
 
     int timeToWait;
+    int counter = 0;
     QTime currTime;
     QTime nextTime;
+
     Event* currEvent;
     Event* nextEvent;
 
@@ -64,20 +68,56 @@ void MainWindow::startPlayback(){
          //continue
 
          currEvent = eventManager.getNextEvent();
-         nextEvent = eventManager.getNextEvent();
-
-         //get time from event
          currTime = currEvent->getTime();
+
+         nextEvent = eventManager.getNextEvent();
          nextTime = nextEvent->getTime();
-
-         qDebug() << currTime.toString();
-         qDebug() << "\n" + nextTime.toString();
-
-         timeToWait = nextTime.msecsTo(currTime);
-
+         timeToWait = abs(nextTime.msecsTo(currTime));
          qDebug("value = %d", timeToWait);
 
+         mapWidget->mapPositionChanged(currEvent->getPos());
 
+         //sleeping for x msecs
+         QTimer timer;
+         timer.start(timeToWait);
+         QEventLoop loop;
+         connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+         loop.exec();
+
+         //execute the next event
+         mapWidget->mapPositionChanged(nextEvent->getPos());
+         mapWidget->mapScaleChanged(nextEvent->getScale());
+
+         currEvent = nextEvent;
+
+         counter+=2;
+
+         while(eventManager.isInicialized()){
+            nextEvent = eventManager.getNextEvent();
+            counter++;
+            currTime = currEvent->getTime();
+            nextTime = nextEvent->getTime();
+            timeToWait = abs(nextTime.msecsTo(currTime));
+            qDebug("value = %d", timeToWait);
+
+           // mapWidget->mapPositionChanged(currEvent->getPos());
+
+            //sleeping for x msecs
+            QTimer timer;
+            timer.start(timeToWait);
+            QEventLoop loop;
+            connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+            loop.exec();
+
+            mapWidget->mapPositionChanged(nextEvent->getPos());
+            mapWidget->mapScaleChanged(nextEvent->getScale());
+
+            currEvent = nextEvent;
+        }
+
+         qDebug() << counter;
+         qDebug() <<"Playback finished";
+         ui->lblStatus->setText("Playback finished");
 
     }else{
         qDebug()<< "No file has been loaded";

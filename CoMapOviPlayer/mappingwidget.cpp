@@ -70,9 +70,14 @@ void MappingWidget::initialize(QGeoMappingManager* mapManager)
     view->setInteractive (true);
 }
 
-//void MappingWidget::mapPositionChanged(QGeoCoordinate coordinate)
-//{
-//}
+void MappingWidget::mapPositionChanged(QGeoCoordinate coordinate)
+{
+    map->setCenter(coordinate);
+}
+
+void MappingWidget::mapScaleChanged(int scale){
+    map->setZoomLevel(scale);
+}
 
 void MappingWidget::setClientList (QList<ClientConnection*>* list)
 {

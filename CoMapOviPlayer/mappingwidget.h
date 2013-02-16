@@ -23,7 +23,9 @@ public:
     ~MappingWidget ();
 
     //void resizeEvent(QResizeEvent *event);
-    //void mapPositionChanged(QGeoCoordinate coordinate);
+
+    void mapPositionChanged(QGeoCoordinate coordinate);
+    void mapScaleChanged(int scale);
     void setClientList (QList<ClientConnection*>* list);
 
     inline QList<ClientConnection*>* getClientList() {return clientList;}

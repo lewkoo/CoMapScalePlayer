@@ -13,7 +13,7 @@ void EventManager::addEvent(Event::EventType type, int userId, QString params)
     QStringList elements = params.split(';');
     QStringList timeParts = elements[0].split(':');
     QStringList secondParts = timeParts[2].split('.');
-    int h, m, s, ms;
+    int h, m, s, ms, scale;
 
     h = timeParts[0].toInt();
     m = timeParts[1].toInt();
@@ -23,7 +23,8 @@ void EventManager::addEvent(Event::EventType type, int userId, QString params)
     QGeoCoordinate topLeft (elements[3].toFloat(), elements[4].toFloat());
     QGeoCoordinate botRight (elements[5].toFloat(), elements[6].toFloat());
     QGeoBoundingBox box (topLeft, botRight);
-    Event* newEvent = new Event(type, userId, h, m, s, ms, pos, box);
+    scale = elements[7].toInt();
+    Event* newEvent = new Event(type, userId, h, m, s, ms, pos, box, scale);
 
     addEvent(newEvent);
 }
