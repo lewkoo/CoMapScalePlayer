@@ -1,0 +1,16 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\mappingwidget.o
+./release\mapoverlay.o
+./release\mapmarker.o
+./release\geomap.o
+./release\zoombuttonitem.o
+./release\datalogger.o
+./release\eventmanager.o
+./release\event.o
+./release\moc_mainwindow.o
+./release\moc_mappingwidget.o
+./release\moc_geomap.o
+./release\qrc_Icons.o
+);
