@@ -20,8 +20,14 @@ public:
     Event(Event::EventType& type, int userId, int h, int m, int s, int ms, QGeoCoordinate& pos, QGeoBoundingBox& box);
 
     inline QTime getTime() const {return time;}
-    //inline void setTime(QTime time) {this->time = time;}
-   // inline void setPos(QGeoCoordinate pos) {this->position = pos;}
+    inline void setTime(QTime time);
+
+    inline void setPos(QGeoCoordinate& pos);
+    inline QGeoCoordinate getPos();
+
+    inline void setBox(QGeoBoundingBox& box);
+    inline QGeoBoundingBox getBox();
+    inline void printEvent();
 
 private:
     Event::EventType type;

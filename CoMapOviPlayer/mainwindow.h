@@ -28,6 +28,7 @@ private slots:
     void loadIcons();
     void clearMapObjects();
     int loadDataLog();
+    void startPlayback();
 
 private:
     Ui::MainWindow *ui;

@@ -11,6 +11,8 @@ public:
     EventManager();
 
     void addEvent (Event::EventType type, int userId, QString params);
+    Event* getNextEvent();
+    bool isInicialized();
 
 private:
     void addEvent (Event* event);

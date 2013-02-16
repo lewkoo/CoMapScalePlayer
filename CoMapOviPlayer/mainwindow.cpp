@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btnLoad, SIGNAL(clicked()), this, SLOT(loadIcons()));
     connect(ui->btnClear, SIGNAL(clicked()), this, SLOT(clearMapObjects()));
     connect(ui->btnLoadLogFile, SIGNAL(clicked()), this, SLOT(loadDataLog()));
+    connect(ui->btnPlay, SIGNAL(clicked()), this, SLOT(startPlayback()));
 }
 
 MainWindow::~MainWindow()
@@ -43,6 +44,55 @@ void MainWindow::addMapWidget(MappingWidget* mapWidget)
 
     //addDockWidget(Qt::RightDockWidgetArea, dockWidget);
     //dockWidget->setFeatures(QDockWidget::DockWidgetMovable);
+}
+
+void MainWindow::startPlayback(){
+
+    int timeToWait;
+    QTime currTime;
+    QTime nextTime;
+    Event* currEvent;
+    Event* nextEvent;
+
+    //check if the file has been loaded
+
+    if(eventManager.isInicialized()){
+         qDebug()<< "Playback started";
+         ui->lblStatus->setText("Playback started");
+
+
+         //continue
+
+         currEvent = eventManager.getNextEvent();
+         nextEvent = eventManager.getNextEvent();
+
+         //get time from event
+         currTime = currEvent->getTime();
+         nextTime = nextEvent->getTime();
+
+         qDebug() << currTime.toString();
+         qDebug() << "\n" + nextTime.toString();
+
+         timeToWait = nextTime.msecsTo(currTime);
+
+         qDebug("value = %d", timeToWait);
+
+
+
+    }else{
+        qDebug()<< "No file has been loaded";
+        ui->lblStatus->setText("Load a data log first");
+    }
+
+    //load the event from the queue
+
+
+
+
+    //currEvent->printEvent();
+
+
+
 }
 
 //void MainWindow::startServer()
@@ -132,6 +182,7 @@ int MainWindow::loadDataLog()
     int error = 0;
     bool parseOk = true;
     bool nameOk = true;
+    const char DELIM = ';';
 
     if (fileInfo.startsWith("Pos"))
     {

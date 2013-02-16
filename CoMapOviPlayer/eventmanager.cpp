@@ -47,3 +47,15 @@ void EventManager::addEvent(Event* event)
         eventQueue.append(event);
     }
 }
+
+Event* EventManager::getNextEvent(){
+    return eventQueue.dequeue();
+}
+
+bool EventManager::isInicialized(){
+    if(eventQueue.isEmpty() == true){
+        return false;
+    }else{
+        return true;
+    }
+}

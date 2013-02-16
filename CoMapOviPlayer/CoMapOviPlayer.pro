@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     zoombuttonitem.cpp \
     datalogger.cpp \
     eventmanager.cpp \
-    event.cpp
+    event.cpp \
+    dataplayer.cpp
 
 HEADERS  += mainwindow.h \
     mappingwidget.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     zoombuttonitem.h \
     datalogger.h \
     eventmanager.h \
-    event.h
+    event.h \
+    dataplayer.h
 
 FORMS    += mainwindow.ui
 

@@ -14,7 +14,6 @@ int main(int argc, char *argv[])
     QRect screenSize(QApplication::desktop()->rect().topLeft(), QApplication::desktop()->rect().bottomRight());
     MappingWidget mapWidget (screenSize);
 
-   // QList<QGeoServiceProviderFactory*> candidates = QGeoServiceProviderPrivate::plugins().values("nokia");
 
     QGeoServiceProvider serviceProvider ("nokia");
 
