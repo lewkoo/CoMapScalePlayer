@@ -53,6 +53,10 @@ Event* EventManager::getNextEvent(){
     return eventQueue.dequeue();
 }
 
+Event* EventManager::getEventAt(int position){
+    return eventQueue.at(position);
+}
+
 bool EventManager::isInicialized(){
     if(eventQueue.isEmpty() == true){
         return false;

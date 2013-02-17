@@ -12,6 +12,7 @@ public:
 
     void addEvent (Event::EventType type, int userId, QString params);
     Event* getNextEvent();
+    Event* getEventAt(int position);
     bool isInicialized();
     int getLength();
 

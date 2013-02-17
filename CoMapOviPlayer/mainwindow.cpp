@@ -61,6 +61,7 @@ void MainWindow::startPlayback(){
 
     totalActions = eventManager.getLength();
     ui->horizontalSlider->setMaximum(totalActions);
+    //set played and remaining
 
     int timeToWait;
     QTime currTime;
@@ -85,68 +86,31 @@ void MainWindow::startPlayback(){
          timeToWait = abs(nextTime.msecsTo(currTime));
          qDebug("value = %d", timeToWait);
 
-         //mapWidget->mapPositionChanged(currEvent->getPos());
-         mapWidget->mapBoxChanged(currEvent->getBox());
-         mapWidget->update();
-         updateUi();
-         //ui->lblNumSteps->setText(numSteps.setNum(counter));
-
-
+         updateMap(currEvent->getBox());
 
          //sleeping for x msecs
-         QTimer timer;
-         timer.start(timeToWait);
-         QEventLoop loop;
-         connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
-         loop.exec();
+         sleepFor(timeToWait);
 
-         //execute the next event
-        //mapWidget->mapPositionChanged(nextEvent->getPos());
-         mapWidget->mapBoxChanged(currEvent->getBox());
-         mapWidget->update();
-         updateUi();
-         //ui->lblNumSteps->setText(numSteps.setNum(counter));
-
-
-         //mapWidget->mapScaleChanged(nextEvent->getScale());
+         updateMap(nextEvent->getBox());
 
          currEvent = nextEvent;
 
 
          while(eventManager.getLength() >= 1 && pause == false){
 
-             if(pause == true){
-                 ui->lblStatus->setText("Playback finished");
-             }
-
             nextEvent = eventManager.getNextEvent();
-           // counter--;
+
             currTime = currEvent->getTime();
             nextTime = nextEvent->getTime();
             timeToWait = abs(nextTime.msecsTo(currTime));
             qDebug("value = %d", timeToWait);
 
-           // mapWidget->mapPositionChanged(currEvent->getPos());
-              mapWidget->mapBoxChanged(currEvent->getBox());
-              mapWidget->update();
-              updateUi();
-             // ui->lblNumSteps->setText(numSteps.setNum(counter));
-
+            updateMap(currEvent->getBox());
 
             //sleeping for x msecs
-            QTimer timer;
-            timer.start(timeToWait);
-            QEventLoop loop;
-            connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
-            loop.exec();
+            sleepFor(timeToWait);
 
-            //mapWidget->mapPositionChanged(nextEvent->getPos());
-            mapWidget->mapBoxChanged(nextEvent->getBox());
-            mapWidget->update();
-            updateUi();
-            //ui->lblNumSteps->setText(numSteps.setNum(counter));
-
-            //mapWidget->mapScaleChanged(nextEvent->getScale());
+            updateMap(nextEvent->getBox());
 
             currEvent = nextEvent;
         }
@@ -175,6 +139,21 @@ void MainWindow::updateUi(){
     ui->lblNumSteps->setText(numSteps.setNum(actionsLeft));
     ui->horizontalSlider->setSliderPosition(currAction);
 
+}
+
+void MainWindow::updateMap(QGeoBoundingBox box){
+    mapWidget->mapBoxChanged(box);
+    mapWidget->update();
+    updateUi();
+}
+
+void MainWindow::sleepFor(int timeToWait){
+    //sleeping for x msecs
+    QTimer timer;
+    timer.start(timeToWait);
+    QEventLoop loop;
+    connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+    loop.exec();
 }
 
 //void MainWindow::startServer()
@@ -315,6 +294,7 @@ void MainWindow::switchPause(){
         this->pause = true;
     }else if(this->pause == true){
         this->pause = false;
+        startPlayback();
     }
 }
 
