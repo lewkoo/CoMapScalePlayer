@@ -142,7 +142,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="playStatus">
+         <widget class="QLabel" name="lblNumSteps">
           <property name="enabled">
            <bool>true</bool>
           </property>

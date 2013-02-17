@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sat Feb 16 18:56:14 2013
+** Created: Sat Feb 16 20:49:33 2013
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -47,7 +47,7 @@ public:
     QPushButton *btnLoad;
     QPushButton *btnLoadLogFile;
     QLabel *lblStatus;
-    QLabel *playStatus;
+    QLabel *lblNumSteps;
     QPushButton *btnQuit;
     QSpacerItem *verticalSpacer;
     QMenuBar *menuBar;
@@ -131,13 +131,13 @@ public:
 
         verticalLayout->addWidget(lblStatus);
 
-        playStatus = new QLabel(centralWidget);
-        playStatus->setObjectName(QString::fromUtf8("playStatus"));
-        playStatus->setEnabled(true);
-        playStatus->setMinimumSize(QSize(150, 50));
-        playStatus->setMaximumSize(QSize(150, 50));
+        lblNumSteps = new QLabel(centralWidget);
+        lblNumSteps->setObjectName(QString::fromUtf8("lblNumSteps"));
+        lblNumSteps->setEnabled(true);
+        lblNumSteps->setMinimumSize(QSize(150, 50));
+        lblNumSteps->setMaximumSize(QSize(150, 50));
 
-        verticalLayout->addWidget(playStatus);
+        verticalLayout->addWidget(lblNumSteps);
 
         btnQuit = new QPushButton(centralWidget);
         btnQuit->setObjectName(QString::fromUtf8("btnQuit"));
@@ -181,7 +181,7 @@ public:
         btnLoad->setText(QApplication::translate("MainWindow", "Load Icons", 0, QApplication::UnicodeUTF8));
         btnLoadLogFile->setText(QApplication::translate("MainWindow", "Load Data Log", 0, QApplication::UnicodeUTF8));
         lblStatus->setText(QString());
-        playStatus->setText(QString());
+        lblNumSteps->setText(QString());
         btnQuit->setText(QApplication::translate("MainWindow", "Quit", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

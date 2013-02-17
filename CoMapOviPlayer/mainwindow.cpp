@@ -20,11 +20,16 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    currAction=0;
+    totalActions=0;
+    actionsLeft = 0;
+
     connect(ui->btnQuit, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->btnLoad, SIGNAL(clicked()), this, SLOT(loadIcons()));
     connect(ui->btnClear, SIGNAL(clicked()), this, SLOT(clearMapObjects()));
     connect(ui->btnLoadLogFile, SIGNAL(clicked()), this, SLOT(loadDataLog()));
     connect(ui->btnPlay, SIGNAL(clicked()), this, SLOT(startPlayback()));
+
 }
 
 MainWindow::~MainWindow()
@@ -50,8 +55,10 @@ void MainWindow::addMapWidget(MappingWidget* mapWidget)
 
 void MainWindow::startPlayback(){
 
+    totalActions = eventManager.getLength();
+    ui->horizontalSlider->setMaximum(totalActions);
+
     int timeToWait;
-    int counter = 0;//eventManager.getLength(); //finish this
     QTime currTime;
     QTime nextTime;
 
@@ -59,24 +66,27 @@ void MainWindow::startPlayback(){
     Event* nextEvent;
 
     //check if the file has been loaded
+    updateUi();
 
     if(eventManager.isInicialized()){
          qDebug()<< "Playback started";
          ui->lblStatus->setText("Playback started");
 
-
-         //continue
-
          currEvent = eventManager.getNextEvent();
          currTime = currEvent->getTime();
-
          nextEvent = eventManager.getNextEvent();
          nextTime = nextEvent->getTime();
+         updateUi();
+
          timeToWait = abs(nextTime.msecsTo(currTime));
          qDebug("value = %d", timeToWait);
 
          //mapWidget->mapPositionChanged(currEvent->getPos());
          mapWidget->mapBoxChanged(currEvent->getBox());
+         mapWidget->update();
+         updateUi();
+         //ui->lblNumSteps->setText(numSteps.setNum(counter));
+
 
 
          //sleeping for x msecs
@@ -90,16 +100,18 @@ void MainWindow::startPlayback(){
         //mapWidget->mapPositionChanged(nextEvent->getPos());
          mapWidget->mapBoxChanged(currEvent->getBox());
          mapWidget->update();
+         updateUi();
+         //ui->lblNumSteps->setText(numSteps.setNum(counter));
+
 
          //mapWidget->mapScaleChanged(nextEvent->getScale());
 
          currEvent = nextEvent;
 
-         counter+=2;
 
-         while(eventManager.isInicialized()){
+         while(eventManager.getLength() >= 1){
             nextEvent = eventManager.getNextEvent();
-            counter++;
+           // counter--;
             currTime = currEvent->getTime();
             nextTime = nextEvent->getTime();
             timeToWait = abs(nextTime.msecsTo(currTime));
@@ -108,6 +120,9 @@ void MainWindow::startPlayback(){
            // mapWidget->mapPositionChanged(currEvent->getPos());
               mapWidget->mapBoxChanged(currEvent->getBox());
               mapWidget->update();
+              updateUi();
+             // ui->lblNumSteps->setText(numSteps.setNum(counter));
+
 
             //sleeping for x msecs
             QTimer timer;
@@ -119,12 +134,15 @@ void MainWindow::startPlayback(){
             //mapWidget->mapPositionChanged(nextEvent->getPos());
             mapWidget->mapBoxChanged(nextEvent->getBox());
             mapWidget->update();
+            updateUi();
+            //ui->lblNumSteps->setText(numSteps.setNum(counter));
+
             //mapWidget->mapScaleChanged(nextEvent->getScale());
 
             currEvent = nextEvent;
         }
 
-         qDebug() << counter;
+         //qDebug() << counter;
          qDebug() <<"Playback finished";
          ui->lblStatus->setText("Playback finished");
 
@@ -133,14 +151,14 @@ void MainWindow::startPlayback(){
         ui->lblStatus->setText("Load a data log first");
     }
 
-    //load the event from the queue
+}
 
-
-
-
-    //currEvent->printEvent();
-
-
+void MainWindow::updateUi(){
+    QString numSteps;
+    actionsLeft=eventManager.getLength();
+    currAction = totalActions-actionsLeft;
+    ui->lblNumSteps->setText(numSteps.setNum(actionsLeft));
+    ui->horizontalSlider->setSliderPosition(currAction);
 
 }
 

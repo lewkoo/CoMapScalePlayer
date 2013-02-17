@@ -60,3 +60,7 @@ bool EventManager::isInicialized(){
         return true;
     }
 }
+
+int EventManager::getLength(){
+    return eventQueue.length();
+}

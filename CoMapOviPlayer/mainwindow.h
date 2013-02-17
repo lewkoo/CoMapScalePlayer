@@ -34,6 +34,11 @@ private:
     Ui::MainWindow *ui;
     MappingWidget* mapWidget;
     EventManager eventManager;
+    int currAction;
+    int totalActions;
+    int actionsLeft;
+    void updateUi();
+    void updateMap();
 
 };
 
