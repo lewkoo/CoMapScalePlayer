@@ -31,6 +31,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btnLoadLogFile, SIGNAL(clicked()), this, SLOT(loadDataLog()));
     connect(ui->btnPlay, SIGNAL(clicked()), this, SLOT(startPlayback()));
     connect(ui->btnPause, SIGNAL(clicked()), this, SLOT(switchPause()));
+    connect(ui->horizontalSlider, SIGNAL(sliderReleased()), this, SLOT(sliderAdjusted()));
+    connect(ui->horizontalSlider, SIGNAL(sliderPressed()), this, SLOT(switchPause()));
+
 
 }
 
@@ -74,13 +77,20 @@ void MainWindow::startPlayback(){
     //check if the file has been loaded
     updateUi();
 
-    if(eventManager.isInicialized()){
+    if(eventManager.isInicialized() && currAction < totalActions){
          qDebug()<< "Playback started";
          ui->lblStatus->setText("Playback started");
+         qDebug("Current action: %d",currAction);
 
-         currEvent = eventManager.getNextEvent();
+         //refactor this
+         currEvent = eventManager.getEventAt(currAction);
+         currAction++;
          currTime = currEvent->getTime();
-         nextEvent = eventManager.getNextEvent();
+         //refactor this
+
+
+         nextEvent = eventManager.getEventAt(currAction);
+         currAction++;
          nextTime = nextEvent->getTime();
          updateUi();
 
@@ -97,9 +107,11 @@ void MainWindow::startPlayback(){
          currEvent = nextEvent;
 
 
-         while(eventManager.getLength() >= 1 && pause == false){
+         while(eventManager.getLength() > currAction && pause == false){
 
-            nextEvent = eventManager.getNextEvent();
+
+            nextEvent = eventManager.getEventAt(currAction);
+            currAction++;
 
             currTime = currEvent->getTime();
             nextTime = nextEvent->getTime();
@@ -135,8 +147,7 @@ void MainWindow::startPlayback(){
 
 void MainWindow::updateUi(){
     QString numSteps;
-    actionsLeft=eventManager.getLength();
-    currAction = totalActions-actionsLeft;
+    actionsLeft = totalActions-currAction;
     ui->lblNumSteps->setText(numSteps.setNum(actionsLeft));
     ui->horizontalSlider->setSliderPosition(currAction);
 
@@ -155,6 +166,12 @@ void MainWindow::sleepFor(int timeToWait){
     QEventLoop loop;
     connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
     loop.exec();
+}
+
+void MainWindow::sliderAdjusted(){
+    int positionDebug = ui->horizontalSlider->sliderPosition();
+    this->currAction = positionDebug;
+    startPlayback();
 }
 
 //void MainWindow::startServer()
@@ -205,7 +222,7 @@ void MainWindow::sleepFor(int timeToWait){
 
 void MainWindow::loadIcons()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "/home/bens/Code/CoMapOvi_MapData", tr("CSV files (*.csv)"));
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("CSV files (*.csv)"));
     QFile file(fileName);
 
     if (file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -234,7 +251,9 @@ void MainWindow::clearMapObjects()
 
 int MainWindow::loadDataLog()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("Text files (*.txt)"));
+    delete &eventManager;
+
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("Text files (*.txt)")); //seqfaults here when loading another file
     int lastSlash = fileName.lastIndexOf('/');
     QString fileInfo = fileName;
     fileInfo.remove(0, lastSlash + 1);
@@ -280,12 +299,21 @@ int MainWindow::loadDataLog()
         }
 
         ui->lblStatus->setText(tr ("read %1 file, user id %2").arg(eventType == Event::NavEvent?"locaton":"visit wares").arg(userId));
-
+        file.close();
     }
     else
     {
         qDebug() << "Can't open file " + fileName;
     }
+
+
+    //in case a file has been played before
+
+    currAction=0;
+    totalActions=0;
+    actionsLeft = 0;
+    pause = false;
+
 
     return error;
 }

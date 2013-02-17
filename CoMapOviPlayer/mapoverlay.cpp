@@ -25,7 +25,7 @@ void MapOverlay::paint(QPainter *painter, const QStyleOptionGraphicsItem* option
            QPointF topLeft = map->coordinateToScreenPosition(box.topLeft());
            QPointF bottomRight = map->coordinateToScreenPosition(box.bottomRight());
            QRectF rect = QRectF(topLeft, bottomRight);
-           QColor colour (155,155,155);
+           QColor colour (255,0,0);
 
            this->boxPen.setColor(colour);
             painter->setPen(boxPen);

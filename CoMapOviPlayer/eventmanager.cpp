@@ -8,6 +8,10 @@ EventManager::EventManager()
 {
 }
 
+EventManager::~EventManager(){
+    delete &eventQueue;
+}
+
 void EventManager::addEvent(Event::EventType type, int userId, QString params)
 {
     QStringList elements = params.split(';');

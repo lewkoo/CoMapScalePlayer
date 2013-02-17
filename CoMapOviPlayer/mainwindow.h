@@ -30,6 +30,7 @@ private slots:
     int loadDataLog();
     void startPlayback();
     void switchPause();
+    void sliderAdjusted();
 
 private:
     Ui::MainWindow *ui;
@@ -42,6 +43,7 @@ private:
     void updateUi();
     void updateMap(QGeoBoundingBox box);
     void sleepFor(int timeToWait);
+
 
 
 };

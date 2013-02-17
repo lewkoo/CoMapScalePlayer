@@ -17,6 +17,13 @@ Event::Event(Event::EventType& type, int userId,  int h, int m, int s, int ms, Q
     this->scale = scale;
 }
 
+Event::~Event(){
+    delete &type;
+    delete &time;
+    delete &position;
+    delete &box;
+}
+
 
 void Event::setTime(QTime time){
     this->time = time;
