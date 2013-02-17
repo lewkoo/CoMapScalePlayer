@@ -1,4 +1,5 @@
 #include <QGraphicsScene>
+#include "qgeoboundingbox.h"
 #include "qgeocoordinate.h"
 #include <QGraphicsView>
 #include <qgeoserviceprovider.h>
@@ -77,6 +78,11 @@ void MappingWidget::mapPositionChanged(QGeoCoordinate coordinate)
 
 void MappingWidget::mapScaleChanged(int scale){
     map->setZoomLevel(scale);
+}
+
+
+void MappingWidget::mapBoxChanged(QGeoBoundingBox box){
+    map->setGeoBoundingBox(box);
 }
 
 void MappingWidget::setClientList (QList<ClientConnection*>* list)
@@ -209,5 +215,9 @@ QList<QGeoMapObject*> MappingWidget::getMapObjects()
 
 void MappingWidget::clearMapObjects()
 {
+    map->setGeoBoundingBox(QGeoBoundingBox ());
+    map->update();
+
     map->clearMapObjects();
 }
+

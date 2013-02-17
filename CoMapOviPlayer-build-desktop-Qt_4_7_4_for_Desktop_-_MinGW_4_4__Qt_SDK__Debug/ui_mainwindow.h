@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sat Feb 16 00:02:43 2013
+** Created: Sat Feb 16 18:56:14 2013
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -36,19 +36,20 @@ public:
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QGridLayout *gridLayout;
-    QVBoxLayout *verticalLayout;
-    QPushButton *btnClear;
-    QPushButton *btnLoad;
-    QPushButton *btnLoadLogFile;
-    QLabel *lblStatus;
-    QPushButton *btnQuit;
-    QSpacerItem *verticalSpacer;
     QSpacerItem *horizontalSpacer;
     QHBoxLayout *layoutPlaybar;
     QPushButton *btnPlay;
     QPushButton *btnPause;
     QSlider *horizontalSlider;
     QLabel *lblTime;
+    QVBoxLayout *verticalLayout;
+    QPushButton *btnClear;
+    QPushButton *btnLoad;
+    QPushButton *btnLoadLogFile;
+    QLabel *lblStatus;
+    QLabel *playStatus;
+    QPushButton *btnQuit;
+    QSpacerItem *verticalSpacer;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -67,43 +68,6 @@ public:
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(6);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(6);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        btnClear = new QPushButton(centralWidget);
-        btnClear->setObjectName(QString::fromUtf8("btnClear"));
-
-        verticalLayout->addWidget(btnClear);
-
-        btnLoad = new QPushButton(centralWidget);
-        btnLoad->setObjectName(QString::fromUtf8("btnLoad"));
-
-        verticalLayout->addWidget(btnLoad);
-
-        btnLoadLogFile = new QPushButton(centralWidget);
-        btnLoadLogFile->setObjectName(QString::fromUtf8("btnLoadLogFile"));
-
-        verticalLayout->addWidget(btnLoadLogFile);
-
-        lblStatus = new QLabel(centralWidget);
-        lblStatus->setObjectName(QString::fromUtf8("lblStatus"));
-        lblStatus->setMinimumSize(QSize(150, 100));
-        lblStatus->setMaximumSize(QSize(150, 100));
-
-        verticalLayout->addWidget(lblStatus);
-
-        btnQuit = new QPushButton(centralWidget);
-        btnQuit->setObjectName(QString::fromUtf8("btnQuit"));
-
-        verticalLayout->addWidget(btnQuit);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout->addItem(verticalSpacer);
-
-
-        gridLayout->addLayout(verticalLayout, 0, 0, 1, 1);
-
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout->addItem(horizontalSpacer, 0, 1, 1, 1);
@@ -142,6 +106,51 @@ public:
 
         gridLayout->addLayout(layoutPlaybar, 1, 0, 1, 2);
 
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        btnClear = new QPushButton(centralWidget);
+        btnClear->setObjectName(QString::fromUtf8("btnClear"));
+
+        verticalLayout->addWidget(btnClear);
+
+        btnLoad = new QPushButton(centralWidget);
+        btnLoad->setObjectName(QString::fromUtf8("btnLoad"));
+
+        verticalLayout->addWidget(btnLoad);
+
+        btnLoadLogFile = new QPushButton(centralWidget);
+        btnLoadLogFile->setObjectName(QString::fromUtf8("btnLoadLogFile"));
+
+        verticalLayout->addWidget(btnLoadLogFile);
+
+        lblStatus = new QLabel(centralWidget);
+        lblStatus->setObjectName(QString::fromUtf8("lblStatus"));
+        lblStatus->setMinimumSize(QSize(150, 50));
+        lblStatus->setMaximumSize(QSize(150, 50));
+
+        verticalLayout->addWidget(lblStatus);
+
+        playStatus = new QLabel(centralWidget);
+        playStatus->setObjectName(QString::fromUtf8("playStatus"));
+        playStatus->setEnabled(true);
+        playStatus->setMinimumSize(QSize(150, 50));
+        playStatus->setMaximumSize(QSize(150, 50));
+
+        verticalLayout->addWidget(playStatus);
+
+        btnQuit = new QPushButton(centralWidget);
+        btnQuit->setObjectName(QString::fromUtf8("btnQuit"));
+
+        verticalLayout->addWidget(btnQuit);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer);
+
+
+        gridLayout->addLayout(verticalLayout, 0, 0, 1, 1);
+
 
         horizontalLayout->addLayout(gridLayout);
 
@@ -165,14 +174,15 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
+        btnPlay->setText(QApplication::translate("MainWindow", "Play", 0, QApplication::UnicodeUTF8));
+        btnPause->setText(QApplication::translate("MainWindow", "Pause", 0, QApplication::UnicodeUTF8));
+        lblTime->setText(QApplication::translate("MainWindow", "0:00/0:00", 0, QApplication::UnicodeUTF8));
         btnClear->setText(QApplication::translate("MainWindow", "Clear Map", 0, QApplication::UnicodeUTF8));
         btnLoad->setText(QApplication::translate("MainWindow", "Load Icons", 0, QApplication::UnicodeUTF8));
         btnLoadLogFile->setText(QApplication::translate("MainWindow", "Load Data Log", 0, QApplication::UnicodeUTF8));
         lblStatus->setText(QString());
+        playStatus->setText(QString());
         btnQuit->setText(QApplication::translate("MainWindow", "Quit", 0, QApplication::UnicodeUTF8));
-        btnPlay->setText(QApplication::translate("MainWindow", "Play", 0, QApplication::UnicodeUTF8));
-        btnPause->setText(QApplication::translate("MainWindow", "Pause", 0, QApplication::UnicodeUTF8));
-        lblTime->setText(QApplication::translate("MainWindow", "0:00/0:00", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

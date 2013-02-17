@@ -8,6 +8,7 @@
 #include "mapmarker.h"
 
 
+
 QTM_USE_NAMESPACE
 
 class GeoMap;
@@ -26,6 +27,7 @@ public:
 
     void mapPositionChanged(QGeoCoordinate coordinate);
     void mapScaleChanged(int scale);
+    void mapBoxChanged(QGeoBoundingBox box);
     void setClientList (QList<ClientConnection*>* list);
 
     inline QList<ClientConnection*>* getClientList() {return clientList;}
@@ -43,6 +45,7 @@ public:
 protected: //events
     void paintEvent(QPaintEvent *);
     void resizeEvent ( QResizeEvent * event );
+
 signals:
 
 public slots:

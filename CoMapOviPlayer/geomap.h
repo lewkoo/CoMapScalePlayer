@@ -5,6 +5,7 @@
 #include <QColor>
 #include <qgraphicsgeomap.h>
 #include "mappingwidget.h"
+#include <qgeoboundingbox.h>
 
 QTM_USE_NAMESPACE
 
@@ -22,6 +23,9 @@ public:
     void setZoomLevel(qreal zoomLevel); //Shadows parent method.
     void setPixelsPerDegree (void);
 
+    void resetGeoBoundingBox();
+    void setGeoBoundingBox(QGeoBoundingBox box);
+    QGeoBoundingBox getBoundingBox();
 
     inline MappingWidget* getMapWidget() {return mapWidget;}
 
@@ -40,6 +44,7 @@ private:
     double pixelsPerDegreeLongitude;
     QPen textPen;
     //QGeoCoordinate getMapCoordinate();
+    QGeoBoundingBox box;
 };
 
 #endif // GEOMAP_H

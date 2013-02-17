@@ -32,10 +32,6 @@ void Event::setBox(QGeoBoundingBox &box){
     this->box = box;
 }
 
-QGeoBoundingBox Event::getBox(){
-    return this->box;
-}
-
 
 
 

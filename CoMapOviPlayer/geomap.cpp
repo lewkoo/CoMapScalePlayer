@@ -196,3 +196,16 @@ void GeoMap::setPixelsPerDegree()
     pixelsPerDegreeLongitude = this->size().width() / screenWidthDegrees;
     pixelsPerDegreeLatitude = this->size().height() / screenHeightDegrees;
 }
+
+void GeoMap::setGeoBoundingBox(QGeoBoundingBox box){
+    this->box = box;
+}
+
+QGeoBoundingBox GeoMap::getBoundingBox(){
+    return this->box;
+}
+
+void GeoMap::resetGeoBoundingBox(){
+    //this->box = NULL;
+
+}

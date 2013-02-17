@@ -27,7 +27,7 @@ public:
     inline QGeoCoordinate getPos() const {return position;}
 
     inline void setBox(QGeoBoundingBox& box);
-    inline QGeoBoundingBox getBox();
+    inline QGeoBoundingBox getBox() const {return box;}
 
     inline int getScale() const {return scale;}
 

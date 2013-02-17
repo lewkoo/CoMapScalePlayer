@@ -5,6 +5,7 @@
 #include <QPainter>
 #include "mapoverlay.h"
 #include "geomap.h"
+#include <QDebug>
 
 MapOverlay::MapOverlay(GeoMap* map) :
     QGeoMapOverlay()
@@ -13,24 +14,23 @@ MapOverlay::MapOverlay(GeoMap* map) :
     this->boxPen.setWidth(3);
 }
 
-void MapOverlay::paint(QPainter *painter, const QStyleOptionGraphicsItem *option)
+void MapOverlay::paint(QPainter *painter, const QStyleOptionGraphicsItem* option)
 {
-//    QList<ClientConnection*>* clientList = map->getMapWidget()->getClientList();
+    qDebug() << "Got called";
+    // QGeoBoundingBox box = map->getBoundingBox(); //is passed as a parameter
 
-//    if (clientList != NULL)
-//    {
-//        for (int i = 0; i < clientList->size(); i++)
-//        {
-//            QGeoBoundingBox box = clientState->getLastBox();
-//            QPointF topLeft = map->coordinateToScreenPosition(box.topLeft());
-//            QPointF bottomRight = map->coordinateToScreenPosition(box.bottomRight());
-//            QRectF rect = QRectF(topLeft, bottomRight);
-//            QColor colour = clientState->getColour();
 
-//            this->boxPen.setColor(colour);
-//            painter->setPen(boxPen);
-//            painter->drawRect(rect);
-//        }
-//    }
+
+           QGeoBoundingBox box = map->getBoundingBox(); //is passed as a parameter
+           QPointF topLeft = map->coordinateToScreenPosition(box.topLeft());
+           QPointF bottomRight = map->coordinateToScreenPosition(box.bottomRight());
+           QRectF rect = QRectF(topLeft, bottomRight);
+           QColor colour (155,155,155);
+
+           this->boxPen.setColor(colour);
+            painter->setPen(boxPen);
+            painter->drawRect(rect);
+
+
 }
 

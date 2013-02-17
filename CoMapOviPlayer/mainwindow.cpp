@@ -51,7 +51,7 @@ void MainWindow::addMapWidget(MappingWidget* mapWidget)
 void MainWindow::startPlayback(){
 
     int timeToWait;
-    int counter = 0;
+    int counter = 0;//eventManager.getLength(); //finish this
     QTime currTime;
     QTime nextTime;
 
@@ -75,7 +75,9 @@ void MainWindow::startPlayback(){
          timeToWait = abs(nextTime.msecsTo(currTime));
          qDebug("value = %d", timeToWait);
 
-         mapWidget->mapPositionChanged(currEvent->getPos());
+         //mapWidget->mapPositionChanged(currEvent->getPos());
+         mapWidget->mapBoxChanged(currEvent->getBox());
+
 
          //sleeping for x msecs
          QTimer timer;
@@ -85,8 +87,11 @@ void MainWindow::startPlayback(){
          loop.exec();
 
          //execute the next event
-         mapWidget->mapPositionChanged(nextEvent->getPos());
-         mapWidget->mapScaleChanged(nextEvent->getScale());
+        //mapWidget->mapPositionChanged(nextEvent->getPos());
+         mapWidget->mapBoxChanged(currEvent->getBox());
+         mapWidget->update();
+
+         //mapWidget->mapScaleChanged(nextEvent->getScale());
 
          currEvent = nextEvent;
 
@@ -101,6 +106,8 @@ void MainWindow::startPlayback(){
             qDebug("value = %d", timeToWait);
 
            // mapWidget->mapPositionChanged(currEvent->getPos());
+              mapWidget->mapBoxChanged(currEvent->getBox());
+              mapWidget->update();
 
             //sleeping for x msecs
             QTimer timer;
@@ -109,8 +116,10 @@ void MainWindow::startPlayback(){
             connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
             loop.exec();
 
-            mapWidget->mapPositionChanged(nextEvent->getPos());
-            mapWidget->mapScaleChanged(nextEvent->getScale());
+            //mapWidget->mapPositionChanged(nextEvent->getPos());
+            mapWidget->mapBoxChanged(nextEvent->getBox());
+            mapWidget->update();
+            //mapWidget->mapScaleChanged(nextEvent->getScale());
 
             currEvent = nextEvent;
         }
