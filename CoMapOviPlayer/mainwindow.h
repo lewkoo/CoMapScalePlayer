@@ -29,16 +29,19 @@ private slots:
     void clearMapObjects();
     int loadDataLog();
     void startPlayback();
+    void switchPause();
 
 private:
     Ui::MainWindow *ui;
     MappingWidget* mapWidget;
     EventManager eventManager;
+    bool pause;
     int currAction;
     int totalActions;
     int actionsLeft;
     void updateUi();
     void updateMap();
+
 
 };
 

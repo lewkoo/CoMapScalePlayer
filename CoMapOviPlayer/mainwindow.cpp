@@ -23,12 +23,14 @@ MainWindow::MainWindow(QWidget *parent) :
     currAction=0;
     totalActions=0;
     actionsLeft = 0;
+    pause = false;
 
     connect(ui->btnQuit, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->btnLoad, SIGNAL(clicked()), this, SLOT(loadIcons()));
     connect(ui->btnClear, SIGNAL(clicked()), this, SLOT(clearMapObjects()));
     connect(ui->btnLoadLogFile, SIGNAL(clicked()), this, SLOT(loadDataLog()));
     connect(ui->btnPlay, SIGNAL(clicked()), this, SLOT(startPlayback()));
+    connect(ui->btnPause, SIGNAL(clicked()), this, SLOT(switchPause()));
 
 }
 
@@ -54,6 +56,8 @@ void MainWindow::addMapWidget(MappingWidget* mapWidget)
 }
 
 void MainWindow::startPlayback(){
+
+    pause = false;
 
     totalActions = eventManager.getLength();
     ui->horizontalSlider->setMaximum(totalActions);
@@ -109,7 +113,12 @@ void MainWindow::startPlayback(){
          currEvent = nextEvent;
 
 
-         while(eventManager.getLength() >= 1){
+         while(eventManager.getLength() >= 1 && pause == false){
+
+             if(pause == true){
+                 ui->lblStatus->setText("Playback finished");
+             }
+
             nextEvent = eventManager.getNextEvent();
            // counter--;
             currTime = currEvent->getTime();
@@ -143,13 +152,19 @@ void MainWindow::startPlayback(){
         }
 
          //qDebug() << counter;
+         if(pause == true){
+             ui->lblStatus->setText("Playback paused");
+         }else{
          qDebug() <<"Playback finished";
          ui->lblStatus->setText("Playback finished");
-
+         }
     }else{
         qDebug()<< "No file has been loaded";
         ui->lblStatus->setText("Load a data log first");
     }
+
+
+
 
 }
 
@@ -293,5 +308,13 @@ int MainWindow::loadDataLog()
     }
 
     return error;
+}
+
+void MainWindow::switchPause(){
+    if(this->pause == false){
+        this->pause = true;
+    }else if(this->pause == true){
+        this->pause = false;
+    }
 }
 
