@@ -59,6 +59,7 @@ void MainWindow::startPlayback(){
 
     pause = false;
 
+
     totalActions = eventManager.getLength();
     ui->horizontalSlider->setMaximum(totalActions);
     //set played and remaining
