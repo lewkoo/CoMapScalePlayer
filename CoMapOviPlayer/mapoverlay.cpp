@@ -16,7 +16,6 @@ MapOverlay::MapOverlay(GeoMap* map) :
 
 void MapOverlay::paint(QPainter *painter, const QStyleOptionGraphicsItem* option)
 {
-    qDebug() << "Got called";
     // QGeoBoundingBox box = map->getBoundingBox(); //is passed as a parameter
 
 
