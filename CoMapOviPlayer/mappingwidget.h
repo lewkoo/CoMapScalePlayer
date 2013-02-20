@@ -42,6 +42,7 @@ public:
     void addIcons(QStringList iconList);
     void addIcon(QString lineItem);
 
+
 protected: //events
     void paintEvent(QPaintEvent *);
     void resizeEvent ( QResizeEvent * event );

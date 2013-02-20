@@ -247,6 +247,8 @@ void MainWindow::loadIcons()
 void MainWindow::clearMapObjects()
 {
     mapWidget->clearMapObjects();
+    ui->lblStatus->setText("");
+    ui->lblNumSteps->setText("");
 }
 
 int MainWindow::loadDataLog()

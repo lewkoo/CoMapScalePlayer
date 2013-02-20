@@ -49,9 +49,7 @@ void MappingWidget::initialize(QGeoMappingManager* mapManager)
     map->setCenter(QGeoCoordinate(48.854716, 2.346611));
     map->setZoomLevel(12);
 
-//    MapMarker* poiMarker = new MapMarker(MapMarker::PoiType);
-//    poiMarker->setCoordinate(QGeoCoordinate(-27.5769, 153.1));
-//    map->addMapObject (poiMarker);
+
 
 
     MapOverlay* overlay = new MapOverlay(map);

@@ -29,6 +29,9 @@ public:
 
     inline MappingWidget* getMapWidget() {return mapWidget;}
 
+    MapMarker* poiMarker;//make private, add accessors
+
+
 private:
     //Events
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

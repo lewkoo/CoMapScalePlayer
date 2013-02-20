@@ -31,5 +31,12 @@ void MapOverlay::paint(QPainter *painter, const QStyleOptionGraphicsItem* option
             painter->drawRect(rect);
 
 
+
+
+            map->poiMarker->setCoordinate(box.center());
+            map->addMapObject (map->poiMarker);
+
+
+
 }
 
