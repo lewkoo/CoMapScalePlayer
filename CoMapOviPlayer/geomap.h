@@ -24,8 +24,13 @@ public:
     void setPixelsPerDegree (void);
 
     void resetGeoBoundingBox();
-    void setGeoBoundingBox(QGeoBoundingBox box);
-    QGeoBoundingBox getBoundingBox();
+    void setGeoBoundingBoxU1(QGeoBoundingBox box);
+    void setGeoBoundingBoxU2(QGeoBoundingBox box);
+    QGeoBoundingBox getBoundingBoxU1();
+    QGeoBoundingBox getBoundingBoxU2();
+
+    int getUserId();
+    void setUserId(int userId);
 
     inline MappingWidget* getMapWidget() {return mapWidget;}
 
@@ -47,7 +52,9 @@ private:
     double pixelsPerDegreeLongitude;
     QPen textPen;
     //QGeoCoordinate getMapCoordinate();
-    QGeoBoundingBox box;
+    QGeoBoundingBox boxU1;
+    QGeoBoundingBox boxU2;
+    int userId;
 };
 
 #endif // GEOMAP_H

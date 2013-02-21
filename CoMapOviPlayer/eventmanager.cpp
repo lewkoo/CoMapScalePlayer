@@ -36,7 +36,7 @@ void EventManager::addEvent(Event::EventType type, int userId, QString params)
 void EventManager::addEvent(Event* event)
 {
     bool eventInserted = false;
-    for (int i = 0; i < eventQueue.count(); i++)
+    for (int i = 0; i < eventQueue.count() && eventInserted == false; i++)
     {
         const Event* otherEvent = eventQueue.at(i);
 

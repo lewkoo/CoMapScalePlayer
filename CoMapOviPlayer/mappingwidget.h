@@ -27,7 +27,8 @@ public:
 
     void mapPositionChanged(QGeoCoordinate coordinate);
     void mapScaleChanged(int scale);
-    void mapBoxChanged(QGeoBoundingBox box);
+    void mapBoxChanged(QGeoBoundingBox box, int userId);
+    void userIdChanged(int userId);
     void setClientList (QList<ClientConnection*>* list);
 
     inline QList<ClientConnection*>* getClientList() {return clientList;}

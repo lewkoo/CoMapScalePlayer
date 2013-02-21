@@ -3,6 +3,7 @@
 Event::Event(Event::EventType& type, int userId,  int h, int m, int s, int ms, QGeoCoordinate& pos, QGeoBoundingBox& box)
 {
     this->type = type;
+    this->userId = userId;
     this->time = QTime(h,m,s,ms);
     this->position = pos;
     this->box = box;
@@ -11,6 +12,7 @@ Event::Event(Event::EventType& type, int userId,  int h, int m, int s, int ms, Q
 Event::Event(Event::EventType& type, int userId,  int h, int m, int s, int ms, QGeoCoordinate& pos, QGeoBoundingBox& box, int scale)
 {
     this->type = type;
+    this->userId = userId;
     this->time = QTime(h,m,s,ms);
     this->position = pos;
     this->box = box;

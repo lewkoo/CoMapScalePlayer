@@ -118,7 +118,14 @@
         <item>
          <widget class="QPushButton" name="btnLoadLogFile">
           <property name="text">
-           <string>Load Data Log</string>
+           <string>Load Data Log Participant 1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnLoadLogFile2">
+          <property name="text">
+           <string>Load Data Log Participant 2</string>
           </property>
          </widget>
         </item>

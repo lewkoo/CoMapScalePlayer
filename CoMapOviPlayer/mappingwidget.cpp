@@ -52,8 +52,11 @@ void MappingWidget::initialize(QGeoMappingManager* mapManager)
 
 
 
-    MapOverlay* overlay = new MapOverlay(map);
-    map->addMapOverlay(overlay);
+    MapOverlay* overlayRed = new MapOverlay(map);
+    map->addMapOverlay(overlayRed);
+
+    MapOverlay* overlayBlue = new MapOverlay(map);
+    map->addMapOverlay(overlayBlue);
 
 
     view = new QGraphicsView(scene, this);
@@ -79,8 +82,18 @@ void MappingWidget::mapScaleChanged(int scale){
 }
 
 
-void MappingWidget::mapBoxChanged(QGeoBoundingBox box){
-    map->setGeoBoundingBox(box);
+void MappingWidget::mapBoxChanged(QGeoBoundingBox box, int userId){
+    if(userId == 0){
+        map->setGeoBoundingBoxU1(box);
+    }else if(userId == 1){
+        map->setGeoBoundingBoxU2(box);
+    }else{
+        qDebug() << "Invalid user id passed to MappingWidget";
+    }
+}
+
+void MappingWidget::userIdChanged(int userId){
+    map->setUserId(userId);
 }
 
 void MappingWidget::setClientList (QList<ClientConnection*>* list)
@@ -213,7 +226,7 @@ QList<QGeoMapObject*> MappingWidget::getMapObjects()
 
 void MappingWidget::clearMapObjects()
 {
-    map->setGeoBoundingBox(QGeoBoundingBox ());
+    map->resetGeoBoundingBox();
     map->update();
 
     map->clearMapObjects();

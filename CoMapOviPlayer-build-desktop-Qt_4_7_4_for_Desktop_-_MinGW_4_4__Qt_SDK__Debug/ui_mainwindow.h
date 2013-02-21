@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed Feb 20 16:05:27 2013
+** Created: Thu Feb 21 16:30:05 2013
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -46,6 +46,7 @@ public:
     QPushButton *btnClear;
     QPushButton *btnLoad;
     QPushButton *btnLoadLogFile;
+    QPushButton *btnLoadLogFile2;
     QLabel *lblStatus;
     QLabel *lblNumSteps;
     QPushButton *btnQuit;
@@ -124,6 +125,11 @@ public:
 
         verticalLayout->addWidget(btnLoadLogFile);
 
+        btnLoadLogFile2 = new QPushButton(centralWidget);
+        btnLoadLogFile2->setObjectName(QString::fromUtf8("btnLoadLogFile2"));
+
+        verticalLayout->addWidget(btnLoadLogFile2);
+
         lblStatus = new QLabel(centralWidget);
         lblStatus->setObjectName(QString::fromUtf8("lblStatus"));
         lblStatus->setMinimumSize(QSize(150, 50));
@@ -179,7 +185,8 @@ public:
         lblTime->setText(QApplication::translate("MainWindow", "0:00/0:00", 0, QApplication::UnicodeUTF8));
         btnClear->setText(QApplication::translate("MainWindow", "Clear Map", 0, QApplication::UnicodeUTF8));
         btnLoad->setText(QApplication::translate("MainWindow", "Load Icons", 0, QApplication::UnicodeUTF8));
-        btnLoadLogFile->setText(QApplication::translate("MainWindow", "Load Data Log", 0, QApplication::UnicodeUTF8));
+        btnLoadLogFile->setText(QApplication::translate("MainWindow", "Load Data Log Participant 1", 0, QApplication::UnicodeUTF8));
+        btnLoadLogFile2->setText(QApplication::translate("MainWindow", "Load Data Log Participant 2", 0, QApplication::UnicodeUTF8));
         lblStatus->setText(QString());
         lblNumSteps->setText(QString());
         btnQuit->setText(QApplication::translate("MainWindow", "Quit", 0, QApplication::UnicodeUTF8));

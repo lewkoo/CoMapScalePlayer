@@ -33,6 +33,8 @@ public:
 
     inline int getScale() const {return scale;}
 
+    inline int getUserId() const {return userId;}
+
 
 private:
     Event::EventType type;

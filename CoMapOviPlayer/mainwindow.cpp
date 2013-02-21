@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btnLoad, SIGNAL(clicked()), this, SLOT(loadIcons()));
     connect(ui->btnClear, SIGNAL(clicked()), this, SLOT(clearMapObjects()));
     connect(ui->btnLoadLogFile, SIGNAL(clicked()), this, SLOT(loadDataLog()));
+    connect(ui->btnLoadLogFile2, SIGNAL(clicked()), this, SLOT(loadDataLog()));
     connect(ui->btnPlay, SIGNAL(clicked()), this, SLOT(startPlayback()));
     connect(ui->btnPause, SIGNAL(clicked()), this, SLOT(switchPause()));
     connect(ui->horizontalSlider, SIGNAL(sliderReleased()), this, SLOT(sliderAdjusted()));
@@ -97,12 +98,12 @@ void MainWindow::startPlayback(){
          timeToWait = abs(nextTime.msecsTo(currTime));
          qDebug("value = %d", timeToWait);
 
-         updateMap(currEvent->getBox());
+         updateMap(currEvent->getBox(), currEvent->getUserId());
 
          //sleeping for x msecs
          sleepFor(timeToWait);
 
-         updateMap(nextEvent->getBox());
+         updateMap(nextEvent->getBox(), nextEvent->getUserId());
 
          currEvent = nextEvent;
 
@@ -118,12 +119,12 @@ void MainWindow::startPlayback(){
             timeToWait = abs(nextTime.msecsTo(currTime));
             qDebug("value = %d", timeToWait);
 
-            updateMap(currEvent->getBox());
+            updateMap(currEvent->getBox(), currEvent->getUserId());
 
             //sleeping for x msecs
             sleepFor(timeToWait);
 
-            updateMap(nextEvent->getBox());
+            updateMap(nextEvent->getBox(), nextEvent->getUserId());
 
             currEvent = nextEvent;
         }
@@ -153,8 +154,8 @@ void MainWindow::updateUi(){
 
 }
 
-void MainWindow::updateMap(QGeoBoundingBox box){
-    mapWidget->mapBoxChanged(box);
+void MainWindow::updateMap(QGeoBoundingBox box, int userId){
+    mapWidget->mapBoxChanged(box,userId);
     mapWidget->update();
     updateUi();
 }
@@ -173,52 +174,6 @@ void MainWindow::sliderAdjusted(){
     this->currAction = positionDebug;
     startPlayback();
 }
-
-//void MainWindow::startServer()
-//{
-
-//    ui->chkWedge->setEnabled(true);
-//    ui->chkObjWedge->setEnabled(ui->chkWedge->checkState());
-//    ui->chkVw->setEnabled(true);
-
-//    //Give map widget a handle to client data
-//    if (mapWidget != NULL)
-//    {
-//       // mapWidget->setClientList(server->getClientList());
-//    }
-
-
-//    QString ipAddress;
-//    QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
-//    // use the first non-localhost IPv4 address
-//    for (int i = 0; i < ipAddressesList.size(); ++i)
-//    {
-//        if (ipAddressesList.at(i) != QHostAddress::LocalHost &&
-//            ipAddressesList.at(i).toIPv4Address())
-//        {
-//            ipAddress = ipAddressesList.at(i).toString();
-//            break;
-//        }
-//    }
-//    // if we did not find one, use IPv4 localhost
-//    if (ipAddress.isEmpty())
-//        ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
-//    ui->lblStatus->setText(tr("The server is running on\n\nIP: %1\nport: %2\n\n"
-//                            "Ready for N900 connections.")
-//                           .arg(ipAddress).arg(server->serverPort()));
-//}
-
-//void MainWindow::stopServer()
-//{
-//    delete server;
-//    server = NULL;
-
-//    ui->chkWedge->setEnabled(false);
-//    ui->chkObjWedge->setEnabled(false);
-//    ui->chkVw->setEnabled(false);
-
-//    ui->lblStatus->setText(NOT_CONNECTED_TEXT);
-//}
 
 void MainWindow::loadIcons()
 {
@@ -253,7 +208,6 @@ void MainWindow::clearMapObjects()
 
 int MainWindow::loadDataLog()
 {
-    delete &eventManager;
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("Text files (*.txt)")); //seqfaults here when loading another file
     int lastSlash = fileName.lastIndexOf('/');

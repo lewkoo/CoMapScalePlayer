@@ -18,14 +18,16 @@ public:
 
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option);
 
+    void setUserId(int userId);
+
     //void setWedge (QGeoMapPixmapObject* mapObject);
     //void setWedge (QGeoCoordinate coordinate);
     //void clearWedges (void);
 private:
     GeoMap* map;
     //QVector<Wedge> wedges;
-
     QPen boxPen;
+    int userId;
 };
 
 #endif // MAPOVERLAY_H
