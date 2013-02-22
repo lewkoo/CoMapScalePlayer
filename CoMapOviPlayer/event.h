@@ -21,6 +21,7 @@ public:
     Event(Event::EventType& type, int userId,  int h, int m, int s, int ms, QGeoCoordinate& pos, QGeoBoundingBox& box, int scale);
     ~Event();
 
+    inline EventType getType() const {return type;}
 
     inline QTime getTime() const {return time;}
     inline void setTime(QTime time);

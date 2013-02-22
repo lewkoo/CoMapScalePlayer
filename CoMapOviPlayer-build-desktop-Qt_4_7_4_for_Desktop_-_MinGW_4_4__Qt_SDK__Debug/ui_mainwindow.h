@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Thu Feb 21 16:30:05 2013
+** Created: Thu Feb 21 22:09:59 2013
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,6 +14,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QCheckBox>
 #include <QtGui/QGridLayout>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
@@ -36,18 +37,20 @@ public:
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QGridLayout *gridLayout;
-    QSpacerItem *horizontalSpacer;
     QHBoxLayout *layoutPlaybar;
     QPushButton *btnPlay;
     QPushButton *btnPause;
     QSlider *horizontalSlider;
     QLabel *lblTime;
+    QSpacerItem *horizontalSpacer;
     QVBoxLayout *verticalLayout;
     QPushButton *btnClear;
     QPushButton *btnLoad;
     QPushButton *btnLoadLogFile;
-    QPushButton *btnLoadLogFile2;
+    QPushButton *loadVw1;
     QLabel *lblStatus;
+    QCheckBox *Log1loaded;
+    QCheckBox *Log2loaded;
     QLabel *lblNumSteps;
     QPushButton *btnQuit;
     QSpacerItem *verticalSpacer;
@@ -69,10 +72,6 @@ public:
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(6);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer, 0, 1, 1, 1);
-
         layoutPlaybar = new QHBoxLayout();
         layoutPlaybar->setSpacing(6);
         layoutPlaybar->setObjectName(QString::fromUtf8("layoutPlaybar"));
@@ -107,6 +106,10 @@ public:
 
         gridLayout->addLayout(layoutPlaybar, 1, 0, 1, 2);
 
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer, 0, 1, 1, 1);
+
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -125,10 +128,10 @@ public:
 
         verticalLayout->addWidget(btnLoadLogFile);
 
-        btnLoadLogFile2 = new QPushButton(centralWidget);
-        btnLoadLogFile2->setObjectName(QString::fromUtf8("btnLoadLogFile2"));
+        loadVw1 = new QPushButton(centralWidget);
+        loadVw1->setObjectName(QString::fromUtf8("loadVw1"));
 
-        verticalLayout->addWidget(btnLoadLogFile2);
+        verticalLayout->addWidget(loadVw1);
 
         lblStatus = new QLabel(centralWidget);
         lblStatus->setObjectName(QString::fromUtf8("lblStatus"));
@@ -136,6 +139,23 @@ public:
         lblStatus->setMaximumSize(QSize(150, 50));
 
         verticalLayout->addWidget(lblStatus);
+
+        Log1loaded = new QCheckBox(centralWidget);
+        Log1loaded->setObjectName(QString::fromUtf8("Log1loaded"));
+        Log1loaded->setEnabled(false);
+        Log1loaded->setCheckable(true);
+
+        verticalLayout->addWidget(Log1loaded);
+
+        Log2loaded = new QCheckBox(centralWidget);
+        Log2loaded->setObjectName(QString::fromUtf8("Log2loaded"));
+        Log2loaded->setEnabled(false);
+        Log2loaded->setMouseTracking(true);
+        Log2loaded->setCheckable(true);
+        Log2loaded->setAutoExclusive(false);
+        Log2loaded->setTristate(false);
+
+        verticalLayout->addWidget(Log2loaded);
 
         lblNumSteps = new QLabel(centralWidget);
         lblNumSteps->setObjectName(QString::fromUtf8("lblNumSteps"));
@@ -185,9 +205,16 @@ public:
         lblTime->setText(QApplication::translate("MainWindow", "0:00/0:00", 0, QApplication::UnicodeUTF8));
         btnClear->setText(QApplication::translate("MainWindow", "Clear Map", 0, QApplication::UnicodeUTF8));
         btnLoad->setText(QApplication::translate("MainWindow", "Load Icons", 0, QApplication::UnicodeUTF8));
-        btnLoadLogFile->setText(QApplication::translate("MainWindow", "Load Data Log Participant 1", 0, QApplication::UnicodeUTF8));
-        btnLoadLogFile2->setText(QApplication::translate("MainWindow", "Load Data Log Participant 2", 0, QApplication::UnicodeUTF8));
+        btnLoadLogFile->setText(QApplication::translate("MainWindow", "Load Data Log ", 0, QApplication::UnicodeUTF8));
+        loadVw1->setText(QApplication::translate("MainWindow", "Load Anchors", 0, QApplication::UnicodeUTF8));
         lblStatus->setText(QString());
+#ifndef QT_NO_TOOLTIP
+        Log1loaded->setToolTip(QString());
+#endif // QT_NO_TOOLTIP
+        Log1loaded->setText(QApplication::translate("MainWindow", "Log 1 loaded", 0, QApplication::UnicodeUTF8));
+        Log1loaded->setShortcut(QString());
+        Log2loaded->setText(QApplication::translate("MainWindow", "Log 2 Loaded", 0, QApplication::UnicodeUTF8));
+        Log2loaded->setShortcut(QString());
         lblNumSteps->setText(QString());
         btnQuit->setText(QApplication::translate("MainWindow", "Quit", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

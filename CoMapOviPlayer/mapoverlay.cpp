@@ -54,6 +54,8 @@ void MapOverlay::paint(QPainter *painter, const QStyleOptionGraphicsItem* option
 
             map->poiMarker->setCoordinate(boxU1.center());
             map->addMapObject (map->poiMarker);
+            map->poiMarker2->setCoordinate(boxU2.center());
+            map->addMapObject (map->poiMarker2);
 
 
 

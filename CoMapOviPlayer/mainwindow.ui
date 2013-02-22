@@ -17,19 +17,6 @@
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="1">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
       <item row="1" column="0" colspan="2">
        <layout class="QHBoxLayout" name="layoutPlaybar">
         <item>
@@ -99,6 +86,19 @@
         </item>
        </layout>
       </item>
+      <item row="0" column="1">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
       <item row="0" column="0">
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
@@ -118,14 +118,14 @@
         <item>
          <widget class="QPushButton" name="btnLoadLogFile">
           <property name="text">
-           <string>Load Data Log Participant 1</string>
+           <string>Load Data Log </string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="btnLoadLogFile2">
+         <widget class="QPushButton" name="loadVw1">
           <property name="text">
-           <string>Load Data Log Participant 2</string>
+           <string>Load Anchors</string>
           </property>
          </widget>
         </item>
@@ -145,6 +145,50 @@
           </property>
           <property name="text">
            <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="Log1loaded">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string extracomment="Displays if the file 1 has been loaded"/>
+          </property>
+          <property name="text">
+           <string>Log 1 loaded</string>
+          </property>
+          <property name="shortcut">
+           <string/>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="Log2loaded">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="mouseTracking">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Log 2 Loaded</string>
+          </property>
+          <property name="shortcut">
+           <string/>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="autoExclusive">
+           <bool>false</bool>
+          </property>
+          <property name="tristate">
+           <bool>false</bool>
           </property>
          </widget>
         </item>

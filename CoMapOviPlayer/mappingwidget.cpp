@@ -81,6 +81,9 @@ void MappingWidget::mapScaleChanged(int scale){
     map->setZoomLevel(scale);
 }
 
+void MappingWidget::mapAnchorAdded(QGeoCoordinate pos, int userId){
+    addAnchor(pos,userId);
+}
 
 void MappingWidget::mapBoxChanged(QGeoBoundingBox box, int userId){
     if(userId == 0){
@@ -218,6 +221,27 @@ void MappingWidget::addIcon(QString lineItem)
     }
 }
 
+void MappingWidget::addAnchor(QGeoCoordinate pos, int userId){
+    MapMarker::MarkerType markerType;
+    QString text = "";
+
+    if (userId == 0)
+    {
+        markerType = MapMarker::AnchorRedType;
+    }
+    else if (userId == 1)
+    {
+        markerType = MapMarker::AnchorBlueType;
+    }
+    else
+    {
+        qDebug() << "Unknown anchor user id type: ";
+    }
+
+    this->addMapMarker(markerType, pos, text);
+}
+
+
 QList<QGeoMapObject*> MappingWidget::getMapObjects()
 {
     QList<QGeoMapObject*> objectList = map->mapObjects();
@@ -226,9 +250,8 @@ QList<QGeoMapObject*> MappingWidget::getMapObjects()
 
 void MappingWidget::clearMapObjects()
 {
-    map->resetGeoBoundingBox();
+    //map->resetGeoBoundingBox();
     map->update();
-
     map->clearMapObjects();
 }
 

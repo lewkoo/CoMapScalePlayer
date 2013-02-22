@@ -35,6 +35,7 @@ public:
     inline MappingWidget* getMapWidget() {return mapWidget;}
 
     MapMarker* poiMarker;//make private, add accessors
+    MapMarker* poiMarker2;
 
 
 private:
@@ -54,6 +55,7 @@ private:
     //QGeoCoordinate getMapCoordinate();
     QGeoBoundingBox boxU1;
     QGeoBoundingBox boxU2;
+
     int userId;
 };
 

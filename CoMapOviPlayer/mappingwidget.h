@@ -28,6 +28,7 @@ public:
     void mapPositionChanged(QGeoCoordinate coordinate);
     void mapScaleChanged(int scale);
     void mapBoxChanged(QGeoBoundingBox box, int userId);
+    void mapAnchorAdded(QGeoCoordinate pos, int userId);
     void userIdChanged(int userId);
     void setClientList (QList<ClientConnection*>* list);
 
@@ -43,6 +44,7 @@ public:
     void addIcons(QStringList iconList);
     void addIcon(QString lineItem);
 
+    void addAnchor(QGeoCoordinate pos, int userId);
 
 protected: //events
     void paintEvent(QPaintEvent *);

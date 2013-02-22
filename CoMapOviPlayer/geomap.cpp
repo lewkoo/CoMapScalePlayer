@@ -12,6 +12,7 @@ GeoMap::GeoMap (QGeoMappingManager* mapManager, MappingWidget* mapWidget) :
     panActive = false;
     textPen.setColor(QColor("black"));
     poiMarker = new MapMarker(MapMarker::PeerRedType);
+    poiMarker2 = new MapMarker(MapMarker::PeerBlueType);
 }
 
 GeoMap::~GeoMap()

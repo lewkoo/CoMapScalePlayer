@@ -41,7 +41,9 @@ private:
     int totalActions;
     int actionsLeft;
     void updateUi();
+    void processEvent(Event* event);
     void updateMap(QGeoBoundingBox box, int userId);
+    void updateAnchors(QGeoCoordinate pos, int userId);
     void sleepFor(int timeToWait);
 
 

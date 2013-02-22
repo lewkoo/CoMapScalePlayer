@@ -11,6 +11,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "mappingwidget.h"
+#include "event.h"
 
 const QString MainWindow::NOT_CONNECTED_TEXT = QString("Not Connected");
 
@@ -29,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btnLoad, SIGNAL(clicked()), this, SLOT(loadIcons()));
     connect(ui->btnClear, SIGNAL(clicked()), this, SLOT(clearMapObjects()));
     connect(ui->btnLoadLogFile, SIGNAL(clicked()), this, SLOT(loadDataLog()));
-    connect(ui->btnLoadLogFile2, SIGNAL(clicked()), this, SLOT(loadDataLog()));
+    connect(ui->loadVw1, SIGNAL(clicked()), this, SLOT(loadDataLog()));
     connect(ui->btnPlay, SIGNAL(clicked()), this, SLOT(startPlayback()));
     connect(ui->btnPause, SIGNAL(clicked()), this, SLOT(switchPause()));
     connect(ui->horizontalSlider, SIGNAL(sliderReleased()), this, SLOT(sliderAdjusted()));
@@ -98,12 +99,12 @@ void MainWindow::startPlayback(){
          timeToWait = abs(nextTime.msecsTo(currTime));
          qDebug("value = %d", timeToWait);
 
-         updateMap(currEvent->getBox(), currEvent->getUserId());
+         processEvent(currEvent);
 
          //sleeping for x msecs
          sleepFor(timeToWait);
 
-         updateMap(nextEvent->getBox(), nextEvent->getUserId());
+         processEvent(nextEvent);
 
          currEvent = nextEvent;
 
@@ -119,12 +120,12 @@ void MainWindow::startPlayback(){
             timeToWait = abs(nextTime.msecsTo(currTime));
             qDebug("value = %d", timeToWait);
 
-            updateMap(currEvent->getBox(), currEvent->getUserId());
+            processEvent(currEvent);
 
             //sleeping for x msecs
             sleepFor(timeToWait);
 
-            updateMap(nextEvent->getBox(), nextEvent->getUserId());
+            processEvent(nextEvent);
 
             currEvent = nextEvent;
         }
@@ -146,6 +147,14 @@ void MainWindow::startPlayback(){
 
 }
 
+void MainWindow::processEvent(Event* event){
+    if(event->getType() == Event::NavEvent){
+        updateMap(event->getBox(), event->getUserId());
+    }else if(event->getType() == Event::AnchorEvent){
+        updateAnchors(event->getPos(), event->getUserId());
+    }
+}
+
 void MainWindow::updateUi(){
     QString numSteps;
     actionsLeft = totalActions-currAction;
@@ -156,6 +165,12 @@ void MainWindow::updateUi(){
 
 void MainWindow::updateMap(QGeoBoundingBox box, int userId){
     mapWidget->mapBoxChanged(box,userId);
+    mapWidget->update();
+    updateUi();
+}
+
+void MainWindow::updateAnchors(QGeoCoordinate pos, int userId){
+    mapWidget->mapAnchorAdded(pos,userId);
     mapWidget->update();
     updateUi();
 }
@@ -204,6 +219,8 @@ void MainWindow::clearMapObjects()
     mapWidget->clearMapObjects();
     ui->lblStatus->setText("");
     ui->lblNumSteps->setText("");
+    ui->Log1loaded->setChecked(false);
+    ui->Log2loaded->setChecked(false);
 }
 
 int MainWindow::loadDataLog()
@@ -225,6 +242,11 @@ int MainWindow::loadDataLog()
     {
         eventType = Event::NavEvent;
         userId =  QString(fileInfo.at(3)).toInt(&parseOk);
+        if(userId == 0){
+            ui->Log1loaded->setChecked(true);
+        }else if (userId == 1){
+            ui->Log2loaded->setChecked(true);
+        }
     }
     else if (fileInfo.startsWith("Vw"))
     {
