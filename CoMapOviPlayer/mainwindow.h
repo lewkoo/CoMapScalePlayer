@@ -47,6 +47,7 @@ private:
     void updateAnchors(QGeoCoordinate pos, int userId);
     void sleepFor(int timeToWait);
     void sendVLCHotkey();
+    void sendVLCPauseHotkey();
 
 
 
