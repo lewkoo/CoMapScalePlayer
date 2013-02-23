@@ -24,6 +24,7 @@ public:
     inline MappingWidget* getMapWidget() {return this->mapWidget;}
 
 
+
 private slots:
     void loadIcons();
     void clearMapObjects();
@@ -45,6 +46,7 @@ private:
     void updateMap(QGeoBoundingBox box, int userId);
     void updateAnchors(QGeoCoordinate pos, int userId);
     void sleepFor(int timeToWait);
+    void sendVLCHotkey();
 
 
 
