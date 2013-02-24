@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     datalogger.cpp \
     eventmanager.cpp \
     event.cpp \
-    dataplayer.cpp
+    dataplayer.cpp \
+    tracer.cpp
 
 HEADERS  += mainwindow.h \
     mappingwidget.h \
@@ -41,7 +42,8 @@ HEADERS  += mainwindow.h \
     datalogger.h \
     eventmanager.h \
     event.h \
-    dataplayer.h
+    dataplayer.h \
+    tracer.h
 
 FORMS    += mainwindow.ui
 

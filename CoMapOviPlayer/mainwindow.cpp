@@ -29,16 +29,22 @@ MainWindow::MainWindow(QWidget *parent) :
     actionsLeft = 0;
     pause = false;
 
+    tracerRedState = false;
+    tracerBlueState = false;
+
+
+
     connect(ui->btnQuit, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->btnLoad, SIGNAL(clicked()), this, SLOT(loadIcons()));
     connect(ui->btnClear, SIGNAL(clicked()), this, SLOT(clearMapObjects()));
     connect(ui->btnLoadLogFile, SIGNAL(clicked()), this, SLOT(loadDataLog()));
     connect(ui->loadVw1, SIGNAL(clicked()), this, SLOT(loadDataLog()));
-    connect(ui->btnPlay, SIGNAL(clicked()), this, SLOT(startPlayback()));
+    connect(ui->btnPlay, SIGNAL(clicked()), this, SLOT(playPressed()));
     connect(ui->btnPause, SIGNAL(clicked()), this, SLOT(switchPause()));
     connect(ui->horizontalSlider, SIGNAL(sliderReleased()), this, SLOT(sliderAdjusted()));
     connect(ui->horizontalSlider, SIGNAL(sliderPressed()), this, SLOT(switchPause()));
-
+    connect(ui->tracerRed, SIGNAL(stateChanged(int)), this, SLOT(tracerRedSwitched()));
+    connect(ui->tracer2, SIGNAL(stateChanged(int)), this, SLOT(tracerBlueSwitched()));
 
 }
 
@@ -59,8 +65,16 @@ void MainWindow::addMapWidget(MappingWidget* mapWidget)
     mapWidget->setParent(this);
     ui->gridLayout->addWidget(mapWidget, 0, 1);
 
+    tracerRedSwitched();
+    tracerBlueSwitched();
+
     //addDockWidget(Qt::RightDockWidgetArea, dockWidget);
     //dockWidget->setFeatures(QDockWidget::DockWidgetMovable);
+}
+
+void MainWindow::playPressed(){
+    mapWidget->resetTracer();
+    startPlayback();
 }
 
 void MainWindow::startPlayback(){
@@ -192,6 +206,7 @@ void MainWindow::sleepFor(int timeToWait){
 void MainWindow::sliderAdjusted(){
     int positionDebug = ui->horizontalSlider->sliderPosition();
     this->currAction = positionDebug;
+    mapWidget->resetTracer();
     startPlayback();
 }
 
@@ -352,16 +367,35 @@ void MainWindow::sendVLCPauseHotkey(){
         ip.ki.time = 0;
         ip.ki.dwExtraInfo = 0;
 
-        // Press the "A" key
+        // Press the "B" key
         ip.ki.wVk = 0x42; // virtual-key code for the "b" key
         ip.ki.dwFlags = 0; // 0 for key press
         SendInput(1, &ip, sizeof(INPUT));
 
-        // Release the "A" key
+        // Release the "B" key
         ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
         SendInput(1, &ip, sizeof(INPUT));
 
         // Exit normally
 }
 
+void MainWindow::tracerRedSwitched(){
+    if(ui->tracerRed->isChecked() == false){
+        //turn off
+        mapWidget->turnOffRedTracer();
+    }else{
+        //turn on
+        mapWidget->turnOnRedTracer();
+    }
+}
+
+void MainWindow::tracerBlueSwitched(){
+    if(ui->tracer2->isChecked() == false){
+        //turn off
+        mapWidget->turnOffBlueTracer();
+    }else{
+        //turn on
+        mapWidget->turnOnBlueTracer();
+    }
+}
 

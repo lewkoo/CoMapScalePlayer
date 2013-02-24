@@ -32,6 +32,10 @@ private slots:
     void startPlayback();
     void switchPause();
     void sliderAdjusted();
+    void playPressed();
+    void tracerRedSwitched();
+    void tracerBlueSwitched();
+
 
 private:
     Ui::MainWindow *ui;
@@ -48,6 +52,8 @@ private:
     void sleepFor(int timeToWait);
     void sendVLCHotkey();
     void sendVLCPauseHotkey();
+    bool tracerRedState;
+    bool tracerBlueState;
 
 
 

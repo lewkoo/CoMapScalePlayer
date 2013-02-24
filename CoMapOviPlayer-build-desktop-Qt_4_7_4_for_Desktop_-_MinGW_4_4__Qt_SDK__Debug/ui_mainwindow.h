@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Thu Feb 21 22:09:59 2013
+** Created: Sun Feb 24 14:24:47 2013
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -51,6 +51,8 @@ public:
     QLabel *lblStatus;
     QCheckBox *Log1loaded;
     QCheckBox *Log2loaded;
+    QCheckBox *tracerRed;
+    QCheckBox *tracer2;
     QLabel *lblNumSteps;
     QPushButton *btnQuit;
     QSpacerItem *verticalSpacer;
@@ -157,6 +159,16 @@ public:
 
         verticalLayout->addWidget(Log2loaded);
 
+        tracerRed = new QCheckBox(centralWidget);
+        tracerRed->setObjectName(QString::fromUtf8("tracerRed"));
+
+        verticalLayout->addWidget(tracerRed);
+
+        tracer2 = new QCheckBox(centralWidget);
+        tracer2->setObjectName(QString::fromUtf8("tracer2"));
+
+        verticalLayout->addWidget(tracer2);
+
         lblNumSteps = new QLabel(centralWidget);
         lblNumSteps->setObjectName(QString::fromUtf8("lblNumSteps"));
         lblNumSteps->setEnabled(true);
@@ -215,6 +227,8 @@ public:
         Log1loaded->setShortcut(QString());
         Log2loaded->setText(QApplication::translate("MainWindow", "Log 2 Loaded", 0, QApplication::UnicodeUTF8));
         Log2loaded->setShortcut(QString());
+        tracerRed->setText(QApplication::translate("MainWindow", "Tracer User 1 Enabled", 0, QApplication::UnicodeUTF8));
+        tracer2->setText(QApplication::translate("MainWindow", "Tracer User 2 Enabled", 0, QApplication::UnicodeUTF8));
         lblNumSteps->setText(QString());
         btnQuit->setText(QApplication::translate("MainWindow", "Quit", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

@@ -10,6 +10,7 @@ INPUT(
 ./release\eventmanager.o
 ./release\event.o
 ./release\dataplayer.o
+./release\tracer.o
 ./release\moc_mainwindow.o
 ./release\moc_mappingwidget.o
 ./release\moc_geomap.o

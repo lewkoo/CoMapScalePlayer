@@ -215,6 +215,14 @@ QGeoBoundingBox GeoMap::getBoundingBoxU2(){
     return this->boxU2;
 }
 
+void GeoMap::setRedTracerSwitch(bool value){
+    this->redTracer = value;
+}
+
+void GeoMap::setBlueTracerSwitch(bool value){
+    this->blueTracer = value;
+}
+
 void GeoMap::setUserId(int userId){
     this->userId = userId;
 }

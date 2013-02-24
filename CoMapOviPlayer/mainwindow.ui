@@ -193,6 +193,20 @@
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="tracerRed">
+          <property name="text">
+           <string>Tracer User 1 Enabled</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="tracer2">
+          <property name="text">
+           <string>Tracer User 2 Enabled</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="lblNumSteps">
           <property name="enabled">
            <bool>true</bool>

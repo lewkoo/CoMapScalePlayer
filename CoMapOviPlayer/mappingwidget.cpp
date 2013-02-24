@@ -9,6 +9,8 @@
 #include "mapoverlay.h"
 #include <limits>
 #include <QDebug>
+#include "tracer.h"
+
 
 QTM_USE_NAMESPACE
 
@@ -17,6 +19,7 @@ MappingWidget::MappingWidget(QRect &screenSize, QWidget *parent) :
 {
     this->map = NULL;
     this->view = NULL;
+    //this->tracer = new Tracer(map);
 }
 
 MappingWidget::~MappingWidget()
@@ -55,8 +58,11 @@ void MappingWidget::initialize(QGeoMappingManager* mapManager)
     MapOverlay* overlayRed = new MapOverlay(map);
     map->addMapOverlay(overlayRed);
 
-    MapOverlay* overlayBlue = new MapOverlay(map);
-    map->addMapOverlay(overlayBlue);
+    tracer = new Tracer(map);
+    map->addMapOverlay(tracer);
+
+    //MapOverlay* overlayBlue = new MapOverlay(map);
+   // map->addMapOverlay(overlayBlue);
 
 
     view = new QGraphicsView(scene, this);
@@ -70,6 +76,12 @@ void MappingWidget::initialize(QGeoMappingManager* mapManager)
 
     view->setVisible (true);
     view->setInteractive (true);
+}
+
+void MappingWidget::resetTracer(){
+    map->removeMapOverlay(tracer);
+    tracer = new Tracer(map);
+    map->addMapOverlay(tracer);
 }
 
 void MappingWidget::mapPositionChanged(QGeoCoordinate coordinate)
@@ -251,7 +263,26 @@ QList<QGeoMapObject*> MappingWidget::getMapObjects()
 void MappingWidget::clearMapObjects()
 {
     //map->resetGeoBoundingBox();
+    resetTracer();
     map->update();
     map->clearMapObjects();
 }
+
+void MappingWidget::turnOffRedTracer(){
+    map->setRedTracerSwitch(false);
+}
+
+void MappingWidget::turnOnRedTracer(){
+     map->setRedTracerSwitch(true);
+}
+
+void MappingWidget::turnOffBlueTracer(){
+    map->setBlueTracerSwitch(false);
+}
+
+void MappingWidget::turnOnBlueTracer(){
+    map->setBlueTracerSwitch(false);
+}
+
+
 

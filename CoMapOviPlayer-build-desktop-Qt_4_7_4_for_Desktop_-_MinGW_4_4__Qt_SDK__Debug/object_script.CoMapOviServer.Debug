@@ -10,6 +10,7 @@ INPUT(
 ./debug\eventmanager.o
 ./debug\event.o
 ./debug\dataplayer.o
+./debug\tracer.o
 ./debug\moc_mainwindow.o
 ./debug\moc_mappingwidget.o
 ./debug\moc_geomap.o

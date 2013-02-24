@@ -6,6 +6,7 @@
 #include "qgeomappingmanager.h"
 //#include "clientstate.h"
 #include "mapmarker.h"
+#include "tracer.h"
 
 
 
@@ -46,6 +47,15 @@ public:
 
     void addAnchor(QGeoCoordinate pos, int userId);
 
+    void resetTracer();
+
+    void turnOffRedTracer();
+    void turnOnRedTracer();
+
+    void turnOffBlueTracer();
+    void turnOnBlueTracer();
+
+
 protected: //events
     void paintEvent(QPaintEvent *);
     void resizeEvent ( QResizeEvent * event );
@@ -57,6 +67,7 @@ public slots:
 
 private:
     const QRect screenSize;
+    Tracer* tracer;
     GeoMap* map;
     QGraphicsView* view;
     ZoomButtonItem* zoomButton;

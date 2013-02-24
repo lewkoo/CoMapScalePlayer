@@ -29,6 +29,9 @@ public:
     QGeoBoundingBox getBoundingBoxU1();
     QGeoBoundingBox getBoundingBoxU2();
 
+    void setRedTracerSwitch(bool value);
+    void setBlueTracerSwitch(bool value);
+
     int getUserId();
     void setUserId(int userId);
 
@@ -36,6 +39,9 @@ public:
 
     MapMarker* poiMarker;//make private, add accessors
     MapMarker* poiMarker2;
+
+    bool redTracer; //make private add accessors
+    bool blueTracer;
 
 
 private:
@@ -49,6 +55,7 @@ private:
 private:
     MappingWidget* mapWidget;
     bool panActive;
+
     double pixelsPerDegreeLatitude;
     double pixelsPerDegreeLongitude;
     QPen textPen;
