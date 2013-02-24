@@ -281,7 +281,7 @@ void MappingWidget::turnOffBlueTracer(){
 }
 
 void MappingWidget::turnOnBlueTracer(){
-    map->setBlueTracerSwitch(false);
+    map->setBlueTracerSwitch(true);
 }
 
 
