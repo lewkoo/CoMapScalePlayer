@@ -264,7 +264,7 @@ void MappingWidget::clearMapObjects()
 {
     //map->resetGeoBoundingBox();
     resetTracer();
-    map->update();
+    //map->update();
     map->clearMapObjects();
 }
 

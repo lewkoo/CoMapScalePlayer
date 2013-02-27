@@ -27,6 +27,10 @@ void MapOverlay::paint(QPainter *painter, const QStyleOptionGraphicsItem* option
 
            QGeoBoundingBox boxU1 = map->getBoundingBoxU1(); //is passed as a parameter
            QGeoBoundingBox boxU2 = map->getBoundingBoxU2(); //is passed as a parameter
+
+           if(boxU1.isEmpty() == false || boxU2.isEmpty() == false){
+
+
            userId = map->getUserId();//redundant
 
 
@@ -47,16 +51,21 @@ void MapOverlay::paint(QPainter *painter, const QStyleOptionGraphicsItem* option
            this->boxPen.setColor(colour);
            painter->setPen(boxPen);
            painter->drawRect(rect);
+           }
 
 
 
 
 
+           if(boxU1.isEmpty() == false){
             map->poiMarker->setCoordinate(boxU1.center());
             map->addMapObject (map->poiMarker);
+           }
+
+           if(boxU2.isEmpty() == false){
             map->poiMarker2->setCoordinate(boxU2.center());
             map->addMapObject (map->poiMarker2);
-
+           }
 
 
 }
