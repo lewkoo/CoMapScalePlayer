@@ -232,6 +232,9 @@ int GeoMap::getUserId(){
 }
 
 void GeoMap::resetGeoBoundingBox(){
-    //this->box = NULL;
+    this->boxU1.setHeight(0);
+    this->boxU1.setWidth(0);//invalidates
+    this->boxU2.setHeight(0);
+    this->boxU2.setWidth(0);//invalidates
 
 }

@@ -262,7 +262,7 @@ QList<QGeoMapObject*> MappingWidget::getMapObjects()
 
 void MappingWidget::clearMapObjects()
 {
-    //map->resetGeoBoundingBox();
+    map->resetGeoBoundingBox();
     resetTracer();
     //map->update();
     map->clearMapObjects();

@@ -57,12 +57,12 @@ void MapOverlay::paint(QPainter *painter, const QStyleOptionGraphicsItem* option
 
 
 
-           if(boxU1.isEmpty() == false){
+           if(boxU1.isEmpty() == false && map != NULL){
             map->poiMarker->setCoordinate(boxU1.center());
             map->addMapObject (map->poiMarker);
            }
 
-           if(boxU2.isEmpty() == false){
+           if(boxU2.isEmpty() == false && map != NULL){
             map->poiMarker2->setCoordinate(boxU2.center());
             map->addMapObject (map->poiMarker2);
            }
